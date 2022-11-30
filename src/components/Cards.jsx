@@ -1,4 +1,11 @@
 import Card from "./Card";
+import styled from "styled-components";
+
+const Contenedor = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+`;
 
 export default function Cards(props) {
   const { characters } = props;
@@ -12,5 +19,5 @@ export default function Cards(props) {
       key={index}
     />
   ));
-  return <div>{element}</div>;
+  return <Contenedor>{element}</Contenedor>;
 }
