@@ -40,7 +40,7 @@ const Caracteristicas = styled.h3`
 export default function Card(props) {
   return (
     <Container>
-      <Boton onClick={props.onClose}>X</Boton>
+      <Boton onClick={() => props.onClose(props.id)}>X</Boton>
       <Imagen src={props.image} alt="img" />
       <Nombre>{props.name}</Nombre>
       <Caracteristicas>{props.species}</Caracteristicas>

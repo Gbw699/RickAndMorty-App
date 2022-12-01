@@ -1,22 +1,22 @@
 import styled from "styled-components";
+import { useState } from "react";
 
-const Contenedor = styled.div`
-  margin: 1rem;
-`;
-const Buscador = styled.input`
-  margin-right: 0.5rem;
-`;
+const Contenedor = styled.div``;
+const Buscador = styled.input``;
 const Boton = styled.button``;
 
 export default function SearchBar(props) {
+  let [characterId, setCharacterId] = useState();
+
   return (
     <Contenedor>
-      <Buscador type="search" name="search" id="" />
-      <Boton
-        onClick={() => props.onSearch("Texto para remplazar con characterID")}
-      >
-        Agregar
-      </Boton>
+      <Buscador
+        type="search"
+        name="search"
+        id="#"
+        onChange={(e) => setCharacterId((characterId = e.target.value))}
+      />
+      <Boton onClick={() => props.onSearch(characterId)}>Agregar</Boton>
     </Contenedor>
   );
 }
