@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const Container = styled.div`
   border: 1px solid black;
@@ -42,7 +43,9 @@ export default function Card(props) {
     <Container>
       <Boton onClick={() => props.onClose(props.id)}>X</Boton>
       <Imagen src={props.image} alt="img" />
+      <NavLink to={`/detail/${props.id}`}>
       <Nombre>{props.name}</Nombre>
+      </NavLink>
       <Caracteristicas>{props.species}</Caracteristicas>
       <Caracteristicas>{props.gender}</Caracteristicas>
     </Container>

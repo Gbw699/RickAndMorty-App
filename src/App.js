@@ -2,7 +2,10 @@ import Cards from "./components/Cards";
 import styled from "styled-components";
 import img from "./img/hd-wallpaper-5858656.jpg";
 import Nav from "./components/Nav";
-import { useState } from "react";
+import About from "./components/About";
+import Detail from "./components/Detail";
+import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 
 const Contenedor = styled.div`
   background-image: url(${img});
@@ -13,7 +16,9 @@ const Contenedor = styled.div`
 
 function App() {
   // eslint-disable-next-line no-unused-vars
-  let [characters, setCharacters] = useState([]);
+  const [characters, setCharacters] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  //const [toggle, setToggle] = useState(1)
 
   //   const example = {
   //     name: 'Morty Smith',
@@ -21,6 +26,15 @@ function App() {
   //     gender: 'Male',
   //     image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
   //  };
+
+  // useEffect(()=>{
+  //   onSearch(toggle)
+  //   return ()=>onClose(toggle)
+  // }, [toggle])
+
+  useEffect(() => {
+    onSearch(1);
+  }, []);
 
   const onSearch = (character) => {
     fetch(`https://rickandmortyapi.com/api/character/${character}`)
@@ -43,7 +57,15 @@ function App() {
   return (
     <Contenedor className="App">
       <Nav onSearch={onSearch} />
-      <Cards characters={characters} onClose={onClose} />
+      <Routes>
+        <Route
+          path="/home"
+          element={<Cards characters={characters} onClose={onClose} />}
+        />
+        <Route path="/about" element={<About />} />
+        <Route path="/detail/:detailId" element={<Detail />} />
+        {/* <button onClick={()=>setToggle(toggle===1 ? 2 : 1 )}>Hola</button> */}
+      </Routes>
     </Contenedor>
   );
 }
