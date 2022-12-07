@@ -19,6 +19,9 @@ export default function Nav(props) {
       <NavLink to={"/about"}>
         <span>About</span>
       </NavLink>
+      <NavLink to={"/favorites"}>
+        <span>Favorites</span>
+      </NavLink>
     </Contenedor>
   );
 }

@@ -4,6 +4,7 @@ import Form from "./components/Form";
 import Nav from "./components/Nav";
 import About from "./components/About";
 import Detail from "./components/Detail";
+import Favorites from "./components/Favorites";
 import img from "./img/hd-wallpaper-5858656.jpg";
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
@@ -24,7 +25,7 @@ function App() {
   const username = "gdbarimboim@gmail.com";
   const password = "hola123";
   // eslint-disable-next-line no-unused-vars
-  //const [toggle, setToggle] = useState(1)
+  //const [toggle, setToggle] = useState(1);
 
   //   const example = {
   //     name: 'Morty Smith',
@@ -33,10 +34,10 @@ function App() {
   //     image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
   //  };
 
-  // useEffect(()=>{
-  //   onSearch(toggle)
-  //   return ()=>onClose(toggle)
-  // }, [toggle])
+  // useEffect(() => {
+  //   onSearch(toggle);
+  //   return () => onClose(toggle);
+  // }, [toggle]);
 
   useEffect(() => {
     onSearch(1);
@@ -84,8 +85,11 @@ function App() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/detail/:detailId" element={<Detail />} />
-        {/* <button onClick={()=>setToggle(toggle===1 ? 2 : 1 )}>Hola</button> */}
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
+      {/* <>
+        <button onClick={() => setToggle(toggle === 1 ? 2 : 1)}>Hola</button>
+      </> */}
     </Contenedor>
   );
 }

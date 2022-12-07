@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { addCharacter, deleteCharacter } from "../redux/actions";
+import { connect } from "react-redux";
 
 const Container = styled.div`
   border: 1px solid black;
@@ -38,16 +40,56 @@ const Caracteristicas = styled.h3`
   min-width: 5rem;
 `;
 
-export default function Card(props) {
+function Card(props) {
+  const [isFav, setIsFav] = useState(false);
+
+  useEffect(() => {
+    props.myFavorites.forEach((fav) => {
+       if (fav.id === props.id) {
+          setIsFav(true);
+       }
+    });
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+ }, [props.myFavorites]);
+
+  const handleFavorite = () => {
+    if (isFav) {
+      setIsFav(false);
+      props.deleteCharacter(props.id);
+    }
+    if (!isFav) {
+      setIsFav(true);
+      props.addCharacter(props);
+    }
+  };
+
   return (
     <Container>
+      {isFav ? (
+        <button onClick={handleFavorite}>❤️</button>
+      ) : (
+        <button onClick={handleFavorite}>🤍</button>
+      )}
       <Boton onClick={() => props.onClose(props.id)}>X</Boton>
       <Imagen src={props.image} alt="img" />
       <NavLink to={`/detail/${props.id}`}>
-      <Nombre>{props.name}</Nombre>
+        <Nombre>{props.name}</Nombre>
       </NavLink>
       <Caracteristicas>{props.species}</Caracteristicas>
       <Caracteristicas>{props.gender}</Caracteristicas>
     </Container>
   );
 }
+
+const mapStateToProps = (state) => {
+  return { myFavorites: state.myFavorites };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addCharacter: (character) => dispatch(addCharacter(character)),
+    deleteCharacter: (id) => dispatch(deleteCharacter(id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card);
