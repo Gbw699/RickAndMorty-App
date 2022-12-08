@@ -41,6 +41,7 @@ function App() {
 
   useEffect(() => {
     onSearch(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -48,15 +49,25 @@ function App() {
   }, [access, navigate]);
 
   const onSearch = (character) => {
-    fetch(`https://rickandmortyapi.com/api/character/${character}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.name) {
-          setCharacters((oldChars) => [...oldChars, data]);
-        } else {
-          window.alert("No hay personajes con ese ID");
-        }
-      });
+    let flag = true;
+    characters.forEach((element) => {
+      if (parseInt(character) === element.id) {
+        window.alert(
+          "El personaje que desea agregar ya se encuentra en la aplicación"
+        );
+        return (flag = false);
+      }
+    });
+    flag &&
+      fetch(`https://rickandmortyapi.com/api/character/${character}`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.name) {
+            setCharacters((oldChars) => [...oldChars, data]);
+          } else {
+            window.alert("No hay personajes con ese ID");
+          }
+        });
   };
 
   const onClose = (character) => {
