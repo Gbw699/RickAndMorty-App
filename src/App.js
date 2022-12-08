@@ -27,13 +27,6 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   //const [toggle, setToggle] = useState(1);
 
-  //   const example = {
-  //     name: 'Morty Smith',
-  //     species: 'Human',
-  //     gender: 'Male',
-  //     image: 'https://rickandmortyapi.com/api/character/avatar/2.jpeg',
-  //  };
-
   // useEffect(() => {
   //   onSearch(toggle);
   //   return () => onClose(toggle);
