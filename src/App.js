@@ -27,15 +27,15 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   //const [toggle, setToggle] = useState(1);
 
-  // useEffect(() => {
-  //   onSearch(toggle);
-  //   return () => onClose(toggle);
-  // }, [toggle]);
+  //  useEffect(() => {
+  //    onSearch(toggle);
+  //    return () => onClose(toggle);
+  //  }, [toggle]);
 
-  useEffect(() => {
-    onSearch(1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+   useEffect(() => {
+     onSearch(1);
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
 
   useEffect(() => {
     !access && navigate("/");
@@ -91,9 +91,9 @@ function App() {
         <Route path="/detail/:detailId" element={<Detail />} />
         <Route path="/favorites" element={<Favorites />} />
       </Routes>
-      {/* <>
+       {/* <>
         <button onClick={() => setToggle(toggle === 1 ? 2 : 1)}>Hola</button>
-      </> */}
+      </>  */}
     </Contenedor>
   );
 }
