@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { addCharacter, deleteCharacter } from "../redux/actions";
+import { addCharacterFavourite, deleteCharacterFavourite } from "../redux/actions";
 import { connect } from "react-redux";
 
 const Container = styled.div`
@@ -55,11 +55,11 @@ function Card(props) {
   const handleFavorite = () => {
     if (isFav) {
       setIsFav(false);
-      props.deleteCharacter(props.id);
+      props.deleteCharacterFavourite(props.id);
     }
     if (!isFav) {
       setIsFav(true);
-      props.addCharacter(props);
+      props.addCharacterFavourite(props);
     }
   };
 
@@ -87,8 +87,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCharacter: (character) => dispatch(addCharacter(character)),
-    deleteCharacter: (id) => dispatch(deleteCharacter(id)),
+    addCharacterFavourite: (character) => dispatch(addCharacterFavourite(character)),
+    deleteCharacterFavourite: (id) => dispatch(deleteCharacterFavourite(id)),
   };
 };
 
