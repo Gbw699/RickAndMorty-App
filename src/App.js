@@ -18,7 +18,7 @@ const Contenedor = styled.div`
 
 function App() {
   // eslint-disable-next-line no-unused-vars
-  const [characters, setCharacters] = useState([]);
+  // const [characters, setCharacters] = useState([]);
   const [access, setAccess] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -32,42 +32,42 @@ function App() {
   //    return () => onClose(toggle);
   //  }, [toggle]);
 
-   useEffect(() => {
-     onSearch(1);
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, []);
+  //  useEffect(() => {
+  //    onSearch(1);
+  //    // eslint-disable-next-line react-hooks/exhaustive-deps
+  //  }, []);
 
   useEffect(() => {
     !access && navigate("/");
   }, [access, navigate]);
 
-  const onSearch = (character) => {
-    let flag = true;
-    characters.forEach((element) => {
-      if (parseInt(character) === element.id) {
-        window.alert(
-          "El personaje que desea agregar ya se encuentra en la aplicación"
-        );
-        return (flag = false);
-      }
-    });
-    flag &&
-      fetch(`https://rickandmortyapi.com/api/character/${character}`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.name) {
-            setCharacters((oldChars) => [...oldChars, data]);
-          } else {
-            window.alert("No hay personajes con ese ID");
-          }
-        });
-  };
+  // const onSearch = (character) => {
+  //   let flag = true;
+  //   characters.forEach((element) => {
+  //     if (parseInt(character) === element.id) {
+  //       window.alert(
+  //         "El personaje que desea agregar ya se encuentra en la aplicación"
+  //       );
+  //       return (flag = false);
+  //     }
+  //   });
+  //   flag &&
+  //     fetch(`https://rickandmortyapi.com/api/character/${character}`)
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         if (data.name) {
+  //           setCharacters((oldChars) => [...oldChars, data]);
+  //         } else {
+  //           window.alert("No hay personajes con ese ID");
+  //         }
+  //       });
+  // };
 
-  const onClose = (character) => {
-    setCharacters((characters) =>
-      characters.filter((element) => element.id !== character)
-    );
-  };
+  // const onClose = (character) => {
+  //   setCharacters((characters) =>
+  //     characters.filter((element) => element.id !== character)
+  //   );
+  // };
 
   const login = (userData) => {
     if (userData.username === username && userData.password === password) {
@@ -80,12 +80,12 @@ function App() {
 
   return (
     <Contenedor className="App">
-      {location.pathname !== "/" && <Nav onSearch={onSearch} />}
+      {location.pathname !== "/" && <Nav  />}
       <Routes>
         <Route path="/" element={<Form login={login} />} />
         <Route
           path="/home"
-          element={<Cards characters={characters} onClose={onClose} />}
+          element={<Cards  />}
         />
         <Route path="/about" element={<About />} />
         <Route path="/detail/:detailId" element={<Detail />} />

@@ -1,17 +1,35 @@
-import { ADD_CHARACTER_FAVOURITE, DELETE_CHARACTER_FAVOURITE, FILTER, ORDER } from "./actions";
+import {
+  ADD_CHARACTER,
+  DELETE_CHARACTER,
+  ADD_CHARACTER_FAVOURITE,
+  DELETE_CHARACTER_FAVOURITE,
+  FILTER,
+  ORDER,
+} from "./actions";
 
 const initialState = {
+  allCharacters: [],
   myFavorites: [],
-  AllCharactersFavourite: [],
+  allCharactersFavourite: [],
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case ADD_CHARACTER:
+      return {
+        ...state,
+        allCharacters: [...state.allCharacters, action.payload],
+      };
+    case DELETE_CHARACTER:
+      return {};
     case ADD_CHARACTER_FAVOURITE:
       return {
         ...state,
-        myFavorites: [...state.AllCharactersFavourite, action.payload],
-        AllCharactersFavourite: [...state.AllCharactersFavourite, action.payload],
+        myFavorites: [...state.allCharactersFavourite, action.payload],
+        allCharactersFavourite: [
+          ...state.allCharactersFavourite,
+          action.payload,
+        ],
       };
     case DELETE_CHARACTER_FAVOURITE:
       const newFavorites = state.myFavorites.filter(
@@ -19,7 +37,9 @@ export default function reducer(state = initialState, action) {
       );
       return { ...state, myFavorites: [...newFavorites] };
     case FILTER:
-      const copiaAllCharactersFavouriteFilter = [...state.AllCharactersFavourite];
+      const copiaAllCharactersFavouriteFilter = [
+        ...state.allCharactersFavourite,
+      ];
       return {
         ...state,
         myFavorites: copiaAllCharactersFavouriteFilter.filter(
@@ -27,7 +47,9 @@ export default function reducer(state = initialState, action) {
         ),
       };
     case ORDER:
-      const copiaAllCharactersFavouriteOrder = [...state.AllCharactersFavourite];
+      const copiaAllCharactersFavouriteOrder = [
+        ...state.allCharactersFavourite,
+      ];
       if (action.payload === "Ascendente") {
         return {
           ...state,

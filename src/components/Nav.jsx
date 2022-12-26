@@ -15,7 +15,7 @@ export default function Nav(props) {
       <NavLink to={"/home"}>
         <span>Home</span>
       </NavLink>
-      <SearchBar onSearch={props.onSearch} />
+      <SearchBar />
       <NavLink to={"/about"}>
         <span>About</span>
       </NavLink>
