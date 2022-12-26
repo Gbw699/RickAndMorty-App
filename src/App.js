@@ -8,6 +8,7 @@ import Favorites from "./components/Favorites";
 import img from "./img/hd-wallpaper-5858656.jpg";
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Contenedor = styled.div`
   background-image: url(${img});
@@ -17,14 +18,13 @@ const Contenedor = styled.div`
 `;
 
 function App() {
-  // eslint-disable-next-line no-unused-vars
-  // const [characters, setCharacters] = useState([]);
   const [access, setAccess] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const username = "gdbarimboim@gmail.com";
   const password = "hola123";
-  // eslint-disable-next-line no-unused-vars
+  const characters = useSelector((state) => state.allCharacters);
+
   //const [toggle, setToggle] = useState(1);
 
   //  useEffect(() => {
@@ -41,34 +41,6 @@ function App() {
     !access && navigate("/");
   }, [access, navigate]);
 
-  // const onSearch = (character) => {
-  //   let flag = true;
-  //   characters.forEach((element) => {
-  //     if (parseInt(character) === element.id) {
-  //       window.alert(
-  //         "El personaje que desea agregar ya se encuentra en la aplicación"
-  //       );
-  //       return (flag = false);
-  //     }
-  //   });
-  //   flag &&
-  //     fetch(`https://rickandmortyapi.com/api/character/${character}`)
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         if (data.name) {
-  //           setCharacters((oldChars) => [...oldChars, data]);
-  //         } else {
-  //           window.alert("No hay personajes con ese ID");
-  //         }
-  //       });
-  // };
-
-  // const onClose = (character) => {
-  //   setCharacters((characters) =>
-  //     characters.filter((element) => element.id !== character)
-  //   );
-  // };
-
   const login = (userData) => {
     if (userData.username === username && userData.password === password) {
       setAccess(true);
@@ -80,18 +52,15 @@ function App() {
 
   return (
     <Contenedor className="App">
-      {location.pathname !== "/" && <Nav  />}
+      {location.pathname !== "/" && <Nav />}
       <Routes>
         <Route path="/" element={<Form login={login} />} />
-        <Route
-          path="/home"
-          element={<Cards  />}
-        />
+        <Route path="/home" element={<Cards characters={characters} />} />
         <Route path="/about" element={<About />} />
         <Route path="/detail/:detailId" element={<Detail />} />
         <Route path="/favorites" element={<Favorites />} />
       </Routes>
-       {/* <>
+      {/* <>
         <button onClick={() => setToggle(toggle === 1 ? 2 : 1)}>Hola</button>
       </>  */}
     </Contenedor>

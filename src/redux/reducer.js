@@ -9,8 +9,8 @@ import {
 
 const initialState = {
   allCharacters: [],
-  myFavorites: [],
   allCharactersFavourite: [],
+  myFavorites: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -21,7 +21,21 @@ export default function reducer(state = initialState, action) {
         allCharacters: [...state.allCharacters, action.payload],
       };
     case DELETE_CHARACTER:
-      return {};
+      const newAllCharacters = state.allCharacters.filter(
+        (element) => element.id !== action.payload
+      );
+      const newAllCharactersFavourite = state.allCharactersFavourite.filter(
+        (element) => element.id !== action.payload
+      );
+      const newFavoritesA = state.myFavorites.filter(
+        (element) => element.id !== action.payload
+      );
+      return {
+        ...state,
+        allCharacters: [...newAllCharacters],
+        allCharactersFavourite: [...newAllCharactersFavourite],
+        myFavorites: [...newFavoritesA],
+      };
     case ADD_CHARACTER_FAVOURITE:
       return {
         ...state,
@@ -32,10 +46,10 @@ export default function reducer(state = initialState, action) {
         ],
       };
     case DELETE_CHARACTER_FAVOURITE:
-      const newFavorites = state.myFavorites.filter(
+      const newFavoritesB = state.myFavorites.filter(
         (element) => element.id !== action.payload
       );
-      return { ...state, myFavorites: [...newFavorites] };
+      return { ...state, myFavorites: [...newFavoritesB] };
     case FILTER:
       const copiaAllCharactersFavouriteFilter = [
         ...state.allCharactersFavourite,

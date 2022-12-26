@@ -1,6 +1,5 @@
 import Card from "./Card";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 
 const Contenedor = styled.div`
   display: flex;
@@ -8,8 +7,8 @@ const Contenedor = styled.div`
   justify-content: space-around;
 `;
 
-export default function Cards() {
-  const characters = useSelector((state) => state.allCharacters)
+export default function Cards(props) {
+  const characters = props.characters;
   const element = characters.map((character, index) => (
     <Card
       name={character.name}

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { addCharacterFavourite, deleteCharacterFavourite } from "../redux/actions";
+import {
+  deleteCharacter,
+  addCharacterFavourite,
+  deleteCharacterFavourite,
+} from "../redux/actions";
 import { connect } from "react-redux";
 
 const Container = styled.div`
@@ -45,12 +49,12 @@ function Card(props) {
 
   useEffect(() => {
     props.myFavorites.forEach((fav) => {
-       if (fav.id === props.id) {
-          setIsFav(true);
-       }
+      if (fav.id === props.id) {
+        setIsFav(true);
+      }
     });
- // eslint-disable-next-line react-hooks/exhaustive-deps
- }, [props.myFavorites]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.myFavorites]);
 
   const handleFavorite = () => {
     if (isFav) {
@@ -70,7 +74,7 @@ function Card(props) {
       ) : (
         <button onClick={handleFavorite}>🤍</button>
       )}
-      <Boton onClick={() => props.onClose(props.id)}>X</Boton>
+      <Boton onClick={() => props.deleteCharacter(props.id)}>X</Boton>
       <Imagen src={props.image} alt="img" />
       <NavLink to={`/detail/${props.id}`}>
         <Nombre>{props.name}</Nombre>
@@ -87,8 +91,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addCharacterFavourite: (character) => dispatch(addCharacterFavourite(character)),
+    addCharacterFavourite: (character) =>
+      dispatch(addCharacterFavourite(character)),
     deleteCharacterFavourite: (id) => dispatch(deleteCharacterFavourite(id)),
+    deleteCharacter: (id) => dispatch(deleteCharacter(id)),
   };
 };
 
