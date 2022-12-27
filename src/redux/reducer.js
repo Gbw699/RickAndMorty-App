@@ -16,6 +16,12 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case ADD_CHARACTER:
+      // state.allCharacters.forEach((character) => {
+      //   console.log(action.payload);
+      //   if (character.id === action.payload.id) {
+      //     return window.alert("El personaje ya se encuentra en la página");
+      //   }
+      // });
       return {
         ...state,
         allCharacters: [...state.allCharacters, action.payload],
