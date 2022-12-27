@@ -55,7 +55,7 @@ export default function reducer(state = initialState, action) {
       const newFavoritesB = state.myFavorites.filter(
         (element) => element.id !== action.payload
       );
-      return { ...state, myFavorites: [...newFavoritesB] };
+      return { ...state, myFavorites: [...newFavoritesB], allCharactersFavourite:[...newFavoritesB] };
     case FILTER:
       const copiaAllCharactersFavouriteFilter = [
         ...state.allCharactersFavourite,
