@@ -1,6 +1,6 @@
 import { addCharacter } from "../redux/actions";
 import styled from "styled-components";
-import { useState } from "react";
+import {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Contenedor = styled.div``;
@@ -11,7 +11,8 @@ export default function SearchBar(props) {
   const dispatch = useDispatch();
   const allCharacters = useSelector((state) => state.allCharacters);
   let [characterId, setCharacterId] = useState();
-
+  
+  
   const handleDispatch = () => {
     let flag = true;
     allCharacters.forEach((character) => {
@@ -22,7 +23,7 @@ export default function SearchBar(props) {
     });
     flag && dispatch(addCharacter(characterId));
   };
-
+  
   return (
     <Contenedor>
       <Buscador

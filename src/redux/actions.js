@@ -17,7 +17,7 @@ export const addCharacter = (id) => {
         }
       });
   };
-  //.then((data) => console.log(data.error))
+  
 };
 export const deleteCharacter = (id) => {
   return { type: DELETE_CHARACTER, payload: id };
